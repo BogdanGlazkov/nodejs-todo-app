@@ -22,14 +22,14 @@
         display: none;
       }
     </style>
-    <title>Задачи</title>
+    <title>Tasks</title>
   </head>
   <body>
     <div id="app" v-cloak>
       <v-app :dark="isDark">
         <v-toolbar color="blue darken-4" dark>
           <v-toolbar-side-icon></v-toolbar-side-icon>
-          <v-toolbar-title class="headline">Список дел</v-toolbar-title>
+          <v-toolbar-title class="headline">Todo list</v-toolbar-title>
 
           <v-spacer></v-spacer>
 
@@ -41,7 +41,7 @@
                 </v-icon>
               </v-btn>
             </template>
-            <span>{{isDark ? 'Светлая тема' : 'Темная тема'}}</span>
+            <span>{{isDark ? 'Light mode' : 'Dark mode'}}</span>
           </v-tooltip>
         </v-toolbar>
         <v-container>
@@ -55,7 +55,7 @@
                     </v-subheader>
                     <v-spacer></v-spacer>
 
-                    <p class="text-xs-right"><b>{{todos.length}}</b> Задач</p>
+                    <p class="text-xs-right"><b>{{todos.length}}</b> Tasks</p>
 
                     <v-flex xs12>
                       <v-text-field
@@ -63,7 +63,7 @@
                         v-model="todoTitle"
                         id="newTodo"
                         name="newTodo"
-                        label="Введите название задачи"
+                        label="Enter task title"
                         @keyup.enter="addTodo"
                         :dark="isDark"
                       >
@@ -71,10 +71,10 @@
                     </v-flex>
                   </v-container>
                   <v-subheader class="subheading" v-if="todos.length === 0">
-                    У вас 0 задач, добавьте новую
+                    You have 0 tasks, add new one
                   </v-subheader>
                   <v-subheader class="subheading" v-else>
-                    Ваши задачи
+                    Your tasks
                   </v-subheader>
                   <div v-for="(todo, i) in todos" :key="i">
                     <v-list-tile avatar>
@@ -90,7 +90,8 @@
                           {{todo.title | capitalize}}
                         </v-list-tile-title>
                         <v-list-tile-sub-title>
-                          Добавлено в: {{todo.date | date}}
+                          Created at: {{todo.createdAt | date(true)}} (updated
+                          at: {{todo.updatedAt | date(true)}})
                         </v-list-tile-sub-title>
                       </v-list-tile-content>
                       <v-btn
