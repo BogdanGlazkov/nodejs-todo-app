@@ -15,7 +15,9 @@ app.use(express.json());
 const source = `{ 
   getTodos{ 
     title id
+    }
    }`;
+
 graphql({ schema, source, rootValue }).then((response) => {
   console.log(response);
 });
