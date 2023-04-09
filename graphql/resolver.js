@@ -38,4 +38,24 @@ module.exports = {
       throw new Error("Fetch todos is not available");
     }
   },
+  createTodo: async ({ todo }) => {
+    try {
+      return await Todo.create({
+        title: todo.title,
+        done: false,
+      });
+    } catch (error) {
+      throw new Error("Title is required");
+    }
+  },
+  completeTodo: async ({ id }) => {
+    try {
+      const todo = await Todo.findByPk(id);
+      todo.done = true;
+      await todo.save();
+      return todo;
+    } catch (error) {
+      throw new Error("Id is required");
+    }
+  },
 };

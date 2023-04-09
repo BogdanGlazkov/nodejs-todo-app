@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const { graphql, buildSchema } = require("graphql");
+const { graphql } = require("graphql");
 require("dotenv").config();
 const sequelize = require("./utils/database");
 const schema = require("./graphql/schema");
@@ -13,8 +13,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 
 const source = `{ 
-  getTodos{ 
-    title id
+    createTodo(todo: {title: "Learn Node.js"}) {
+      title id createdAt
     }
    }`;
 

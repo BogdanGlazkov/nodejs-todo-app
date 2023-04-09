@@ -17,6 +17,10 @@ input UserInput {
     email: String!
 }
 
+input TodoInput {
+    title: String!
+}
+
 type Todo {
     id: ID!
     title: String!
@@ -28,10 +32,9 @@ type Todo {
 type Query {
     hello: TestType!
     random(min: Int!, max: Int!, count: Int!): [Float!]!
-    getTodos: [Todo!]!
-}
-
-type Mutation {
     addTestUser(user: UserInput!): User!
+    getTodos: [Todo!]!
+    createTodo(todo: TodoInput!): Todo!
+    completeTodo(id: ID!): Todo!
 }
 `);
