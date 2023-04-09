@@ -61,8 +61,17 @@ new Vue({
         .catch((err) => console.log(err));
     },
     removeTodo(id) {
-      fetch("/api/todo/" + id, {
-        method: "delete",
+      const query = `
+      mutation {
+        deleteTodo(id: "${id}")
+      }`;
+      fetch("/graphql", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ query }),
       })
         .then(() => {
           this.todos = this.todos.filter((t) => t.id !== id);
@@ -72,7 +81,7 @@ new Vue({
     completeTodo(id) {
       const query = `
       mutation {
-        completeTodo(id: ${id}) {
+        completeTodo(id: "${id}") {
           updatedAt
         }
       }

@@ -36,5 +36,6 @@ type Query {
     getTodos: [Todo!]!
     createTodo(todo: TodoInput!): Todo!
     completeTodo(id: ID!): Todo!
+    deleteTodo(id: ID!): Boolean!
 }
 `);
